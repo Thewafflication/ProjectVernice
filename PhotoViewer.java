@@ -7,17 +7,22 @@ import java.awt.*;
 public class PhotoViewer extends JFrame implements ActionListener
 {
     JMenuItem about, openPhoto;
-    FileWriter archive;
     public final String sep = File.separator;
+    JLabel ImageHolder;
     public PhotoViewer()
     {
         super("Photo Viewer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800,600);
         setJMenuBar(menu());
+        add(photoContainer());
         setVisible(true);
     }
-
+    private JLabel photoContainer()
+    {
+        ImageHolder = new JLabel("Open a photo to view it.");
+        return ImageHolder;
+    }
     private JMenuBar menu()
     {
         JMenuBar res = new JMenuBar();
@@ -52,8 +57,11 @@ public class PhotoViewer extends JFrame implements ActionListener
         JFileChooser fileChoose = new JFileChooser();
         fileChoose.showDialog(this, "Open Photo");
         File chosen = fileChoose.getSelectedFile();
-        System.out.println(chosen);
+        ImageIcon res = new ImageIcon(chosen.toString());
+        System.out.println("DEBUG \n"+chosen.toString());
+        ImageHolder.setIcon(res);
     }
+    
     public static void main(String[] args)
     {
         PhotoViewer main = new PhotoViewer();
