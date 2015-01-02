@@ -89,11 +89,26 @@ public class PhotoViewer extends JFrame implements ActionListener
         JFileChooser fileChoose = new JFileChooser();
         javax.swing.filechooser.FileNameExtensionFilter filter = new javax.swing.filechooser.FileNameExtensionFilter("PNG Images", "png");
         fileChoose.setFileFilter(filter);
-        fileChoose.showDialog(this, "Open Photo");
-        File chosen = fileChoose.getSelectedFile();
-        ImageIcon res = new ImageIcon(chosen.toString());
-        ImageHolder.setIcon(res);
-        status.setText(chosen.toString());
+        int res = fileChoose.showDialog(this, "Open Photo");
+        if(res == JFileChooser.APPROVE_OPTION)
+        {
+            File chosen = fileChoose.getSelectedFile();
+            ImageIcon FCRes = new ImageIcon(chosen.toString());
+            ImageHolder.setIcon(FCRes);
+            status.setText(chosen.toString());    
+        }
+        else if(res == JFileChooser.CANCEL_OPTION)
+        {
+            //DO NOTHING
+        }
+        else if(res == JFileChooser.ERROR_OPTION)
+        {
+            JOptionPane.showMessageDialog(this, "An error occured.");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "We don't know what happenned there boss.");
+        }
     }
     /**
      * Creates a PhotoViewer Window
@@ -101,6 +116,5 @@ public class PhotoViewer extends JFrame implements ActionListener
     public static void main(String[] args)
     {
         PhotoViewer main = new PhotoViewer();
-        System.out.println(main);
     }
 }
