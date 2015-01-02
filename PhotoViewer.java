@@ -12,7 +12,7 @@ public class PhotoViewer extends JFrame implements ActionListener
     JLabel ImageHolder, status;
     public PhotoViewer()
     {
-        super("Photo Viewer");
+        super("Photo Viewer - ProjectVernice");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800,600);
         setLayout(new BorderLayout());
@@ -21,11 +21,17 @@ public class PhotoViewer extends JFrame implements ActionListener
         add(statusBar(), BorderLayout.SOUTH);
         setVisible(true);
     }
+    /**
+     * Creates a JLabel to hold the image
+     */
     private JLabel photoContainer()
     {
         ImageHolder = new JLabel("");
         return ImageHolder;
     }
+    /**
+     * Creates a status bar
+     */
     private JPanel statusBar()
     {
         JPanel res = new JPanel();
@@ -40,6 +46,9 @@ public class PhotoViewer extends JFrame implements ActionListener
         
         return res;
     }
+    /**
+     * Creates a JMenuBar
+     */
     private JMenuBar menu()
     {
         JMenuBar res = new JMenuBar();
@@ -58,7 +67,10 @@ public class PhotoViewer extends JFrame implements ActionListener
         
         return res;
     }
-    
+    /**
+     * Captures menu actions etc.
+     */
+    //@override
     public void actionPerformed(ActionEvent evt)
     {
         Object source = evt.getSource();
@@ -67,18 +79,25 @@ public class PhotoViewer extends JFrame implements ActionListener
         if(source == openPhoto)
             openPhoto();
     }
-
-    
+    /**
+     * Displays a JFileChooser 
+     * Updates the JLabel to have the selected file
+     * Updates the status bar to have the file path of the image
+     */
     public void openPhoto()
     {
         JFileChooser fileChoose = new JFileChooser();
+        javax.swing.filechooser.FileNameExtensionFilter filter = new javax.swing.filechooser.FileNameExtensionFilter("PNG Images", "png");
+        fileChoose.setFileFilter(filter);
         fileChoose.showDialog(this, "Open Photo");
         File chosen = fileChoose.getSelectedFile();
         ImageIcon res = new ImageIcon(chosen.toString());
         ImageHolder.setIcon(res);
         status.setText(chosen.toString());
     }
-    
+    /**
+     * Creates a PhotoViewer Window
+     */
     public static void main(String[] args)
     {
         PhotoViewer main = new PhotoViewer();
