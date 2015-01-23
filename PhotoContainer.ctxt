@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.params=
+comment0.target=PhotoContainer()
+comment0.text=\n\ Constructor\ for\ objects\ of\ class\ PhotoContainer\n
+comment1.params=g
+comment1.target=void\ paintComponent(java.awt.Graphics)
+comment2.params=img
+comment2.target=void\ setImage(java.awt.image.BufferedImage)
+numComments=3
