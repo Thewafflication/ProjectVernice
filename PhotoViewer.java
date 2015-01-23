@@ -10,10 +10,11 @@ import javax.imageio.ImageIO;
 
 public class PhotoViewer extends JFrame implements ActionListener
 {
-    JMenuItem about, openPhoto;
+    private JMenuItem about, openPhoto;
     public final String sep = File.separator;
-    PhotoContainer ImageHolder;
-    JLabel status;
+    private PhotoContainer ImageHolder;
+    private JLabel status;
+    private Path currentDir;
     public PhotoViewer()
     {
         super("Photo Viewer - ProjectVernice");
@@ -89,9 +90,17 @@ public class PhotoViewer extends JFrame implements ActionListener
      * Updates the status bar to have the file path of the image
      */
     public void openPhoto()
-    {
-        JFileChooser fileChoose = new JFileChooser();
-        javax.swing.filechooser.FileNameExtensionFilter filter = new javax.swing.filechooser.FileNameExtensionFilter("PNG Images", "png");
+    {        
+        JFileChooser fileChoose;
+        if(!(currentDir == null))
+        {
+            fileChoose = new JFileChooser(currentDir.toFile());
+        }
+        else
+        {
+            fileChoose = new JFileChooser();
+        }
+        javax.swing.filechooser.FileNameExtensionFilter filter = new javax.swing.filechooser.FileNameExtensionFilter("Images", "png", "jpg", "gif");
         fileChoose.setFileFilter(filter);
         int res = fileChoose.showDialog(this, "Open Photo");
         if(res == JFileChooser.APPROVE_OPTION)
@@ -105,7 +114,8 @@ public class PhotoViewer extends JFrame implements ActionListener
                 System.out.println(e.toString());
             }
             ImageHolder.setImage(img);
-            status.setText(chosen.toString());    
+            status.setText(chosen.toString());
+            currentDir = Paths.get(chosen.getParent());
         }
         else if(res == JFileChooser.CANCEL_OPTION)
         {
