@@ -2,7 +2,7 @@
 comment0.params=
 comment0.target=PhotoViewer()
 comment1.params=
-comment1.target=javax.swing.JLabel\ photoContainer()
+comment1.target=PhotoContainer\ photoContainer()
 comment1.text=\n\ Creates\ a\ JLabel\ to\ hold\ the\ image\n
 comment2.params=
 comment2.target=javax.swing.JPanel\ statusBar()

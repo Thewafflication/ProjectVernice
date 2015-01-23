@@ -1,15 +1,19 @@
+import java.awt.image.BufferedImage;
+import java.awt.Image;
 import java.io.*;
 import java.nio.file.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
+import javax.imageio.ImageIO;
 
 public class PhotoViewer extends JFrame implements ActionListener
 {
     JMenuItem about, openPhoto;
     public final String sep = File.separator;
-    JLabel ImageHolder, status;
+    PhotoContainer ImageHolder;
+    JLabel status;
     public PhotoViewer()
     {
         super("Photo Viewer - ProjectVernice");
@@ -24,9 +28,9 @@ public class PhotoViewer extends JFrame implements ActionListener
     /**
      * Creates a JLabel to hold the image
      */
-    private JLabel photoContainer()
+    private PhotoContainer photoContainer()
     {
-        ImageHolder = new JLabel("");
+        ImageHolder = new PhotoContainer();
         return ImageHolder;
     }
     /**
@@ -93,8 +97,14 @@ public class PhotoViewer extends JFrame implements ActionListener
         if(res == JFileChooser.APPROVE_OPTION)
         {
             File chosen = fileChoose.getSelectedFile();
-            ImageIcon FCRes = new ImageIcon(chosen.toString());
-            ImageHolder.setIcon(FCRes);
+            BufferedImage img = null;
+            try{
+                img = ImageIO.read(chosen);
+            }
+            catch(IOException e){
+                System.out.println(e.toString());
+            }
+            ImageHolder.setImage(img);
             status.setText(chosen.toString());    
         }
         else if(res == JFileChooser.CANCEL_OPTION)
