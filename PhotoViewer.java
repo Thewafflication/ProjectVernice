@@ -41,7 +41,7 @@ public class PhotoViewer extends JFrame implements ActionListener
     {
         JPanel res = new JPanel();
         res.setBorder(new BevelBorder(BevelBorder.LOWERED));
-        res.setPreferredSize(new Dimension(this.getWidth(), 16));
+        res.setPreferredSize(new Dimension(this.getWidth(), 20));
         res.setLayout(new BoxLayout(res, BoxLayout.X_AXIS));
         
         status = new JLabel("Open a photo to view it.");
